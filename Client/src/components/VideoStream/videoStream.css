@@ -1,0 +1,46 @@
+.video-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: absolute;
+  top: 8rem;
+  left: 25rem;
+}
+
+.video-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  width: 125px;
+  height: 195px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.video-card:hover {
+  transform: scale(1.05);
+}
+
+.video-thumbnail img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+}
+
+.video-info {
+  padding: 10px;
+}
+
+.video-title {
+  font-size: 16px;
+  margin: 0;
+}
+
+.video-description {
+  font-size: 14px;
+  color: #666;
+}
+
