@@ -1,6 +1,7 @@
 import "./videoStream.css";
 import VideoPlayer from "./VideoPlayer/VideoPlayer";
-import { useState } from "react";
+// import { useState } from "react";
+import {useNavigate} from "react-router-dom"
 
 
 const videos = [
@@ -39,19 +40,21 @@ const videos = [
 
 
 export default function VideoStream() {
-  const [videoId, setVideoId] = useState(null)
+  // const [videoId, setVideoId] = useState(null)
+
+  const navigate = useNavigate()
 
 
   const playVideo = (e, videoId) =>{
     e.preventDefault
-    setVideoId(videoId)
+    navigate(`/video/${videoId}`);
   }
 
   return (
     <>
-     <div className="videoPlayer">
+     {/* <div className="videoPlayer">
         {videoId && <VideoPlayer videoId={videoId} />}
-      </div>
+      </div> */}
       <div className="video-list">
         {videos.map((video) => (
           <div key={video.id} onClick={(e) => playVideo(e, video.id)} className="video-card">
