@@ -8,10 +8,13 @@ import axios from "axios"
 import { FaVideo } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import { CiLogin } from "react-icons/ci";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { MdClose } from "react-icons/md";
 
 
 export default function Dashboard() {
   const [loggedInUser, SetLoggedInUser] = useState("");
+  const [showIcon, setShowIcon] = useState(false)
 
   useEffect(() => {
     SetLoggedInUser(localStorage.getItem("loggedInUser"));
@@ -21,45 +24,33 @@ export default function Dashboard() {
   
   const handleLogout = async () => {
     try {
-      const response = await axios.post('/api/logout', {}, { withCredentials: true });
+      const response = await axios.post('/api/logout',{ withCredentials: true });
       localStorage.removeItem("token");
       localStorage.removeItem("loggedInUser");
-      setTimeout(()=>{
         navigate("/");
-      })
     } catch (err) {
       console.error('Logout failed:', err);
       
     }
   };
 
+  const handleShow = ()=>{
+    setShowIcon(!showIcon)
+  }
+
   return (
-    <div className="dashBoard_Container">
+    <div className="dashBoard_Container ">
       <div className="logoDiv">
         <FaVideo style={{ fontSize: "20px" }} />
         <span className="LogoName">VStream</span>
       </div>
-
-      {/* <div className="NavBarItems">
-        <ul className="NavbarUl">
-          <li className="navList">
-            <a href="#" className="LinkLoc">
-              All
-            </a>
-          </li>
-          <li className="navList">
-            <a href="#">Actions</a>
-          </li>
-          <li className="navList">
-            <a href="#">Funny</a>
-          </li>
-          <li className="navList">
-            <a href="#">Movies</a>
-          </li>
-        </ul>
-      </div> */}
-
-      <div className="NavbarBtn">
+      <div className="">
+      {
+        showIcon ? <RxHamburgerMenu className="hamBurgerIcon" onClick={handleShow}/> : <MdClose className="hamBurgerIcon" onClick={handleShow}/>
+      }
+      </div>
+      
+     <div className="NavbarBtn">
         <button className="btnlogIn" style={{ color: "black" }}>
           {loggedInUser}
           <CiLogin className="logInIcon" />
@@ -74,6 +65,7 @@ export default function Dashboard() {
           <CiLogout className="logOutIcon" />
         </button>
       </div>
+      
     </div>
   );
 }

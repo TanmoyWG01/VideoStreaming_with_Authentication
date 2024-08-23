@@ -70,13 +70,6 @@ video {
   color: black;
 }
 
-/* .input-box i {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
-} */
 
 .wrapper .remember-forgot {
   display: flex;
@@ -122,4 +115,10 @@ video {
 
 .register-link p a:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 620px) {
+  .LoginWrapper{
+    margin: 0 40px;
+  }
 }

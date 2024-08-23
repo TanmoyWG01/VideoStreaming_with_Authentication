@@ -39,6 +39,7 @@
 }
 
 .NavbarBtn {
+
   margin-right: 7rem;
 }
 
@@ -87,4 +88,58 @@ a {
   color: white;
   padding: 0 0 0 5px;
   top: 38px;
+}
+
+.hamBurgerIcon{
+  position: absolute;
+  visibility: hidden;
+}
+
+
+/* Responsive */
+
+
+@media screen and (max-width: 768px) {
+  .btnNormal {
+    padding: 10px 35px 10px 15px;
+    font-size: 11px;
+  }
+  
+  .btnlogIn{
+    padding: 10px 35px 10px 15px;
+    font-size: 11px;
+  }
+
+  .logInIcon{
+    margin-top: -5px;
+    font-size: 14px;
+  }
+
+  .logOutIcon{
+    margin-top: -5px;
+    font-size: 14px;
+  }
+  .logoDiv{
+    margin: 0;
+  }
+  .NavbarBtn{
+    margin-right: 60px;
+  }
+  
+}
+
+@media screen and (max-width: 465px){
+
+  .hamBurgerIcon{
+    position: absolute;
+    right: 100px;
+    font-size: 20px;
+    visibility: visible;
+  }
+
+  .NavbarBtn{
+  
+    visibility: hidden;
+    
+  }
 }

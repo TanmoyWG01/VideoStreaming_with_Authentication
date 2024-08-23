@@ -17,6 +17,7 @@ export const signup = async (req, res) => {
         const userModel = new User({ name, email, password });
 
         userModel.password = await bcrypt.hash(password, 10);
+        
         await userModel.save();
 
         res.status(200).json({
@@ -66,7 +67,6 @@ export const login = async (req, res) => {
             httpOnly: true,
             maxAge: 3600000,
             path: '/' 
-
         });
 
         // console.log(req.cookies.jwt);

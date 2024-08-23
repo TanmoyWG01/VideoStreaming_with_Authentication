@@ -3,3 +3,12 @@
     height: 55%;
     margin: 11rem 0 0px 28rem;
 }
+
+
+@media screen and (max-width: 767px){
+    .videoGet{
+        width: 55%;
+        height: 45%;
+        margin: 15rem 12rem;
+    }
+}

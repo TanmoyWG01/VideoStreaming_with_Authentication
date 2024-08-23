@@ -5,8 +5,10 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import AuthRouter from "./routes/AuthRouter.js";
 import { createReadStream, statSync } from "fs";
+
 // import { dirname } from "path";
 // import { fileURLToPath } from "url";
+
 import cookieParser from "cookie-parser";
 import { authenticateToken } from "./MiddleWare/Authmiddleware.js";
 import { logout } from "./controllers/AuthController.js";

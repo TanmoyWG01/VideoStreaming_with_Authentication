@@ -1,5 +1,5 @@
 import "./videoStream.css";
-import VideoPlayer from "./VideoPlayer/VideoPlayer";
+// import VideoPlayer from "./VideoPlayer/VideoPlayer";
 // import { useState } from "react";
 import {useNavigate} from "react-router-dom"
 

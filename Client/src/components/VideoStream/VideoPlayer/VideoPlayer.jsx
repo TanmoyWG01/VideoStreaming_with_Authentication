@@ -3,8 +3,9 @@ import "./videoPlayer.css"
 import { useParams } from "react-router-dom";
 
 export default function VideoPlayer() {
-  // const videoRef = useRef(null);
   const {videoId} = useParams()
+ // const videoRef = useRef(null);
+
 
   // useEffect(() => {
   //   if (videoRef.current) {

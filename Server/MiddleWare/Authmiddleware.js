@@ -4,6 +4,7 @@ import User from "../models/User.js";
 
 //SignUp Validation
 
+
 export const signupValidation = (req, res, next) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(100).required(),
@@ -18,7 +19,9 @@ export const signupValidation = (req, res, next) => {
   next();
 };
 
+
 //login Validation
+
 
 export const loginValidation = (req, res, next) => {
   const schema = Joi.object({
@@ -32,6 +35,10 @@ export const loginValidation = (req, res, next) => {
   }
   next();
 };
+
+
+//TokenAuthentication
+
 
 export const authenticateToken = async (req, res, next) => {
  const match = req.cookies.Jwtoken;
