@@ -86,6 +86,8 @@ export const login = async (req, res) => {
     }
 };
 
+//Delete information
+
 export const deleteInfo = async (req, res) => {
     try {
         await User.findByIdAndDelete(req.params.id);
@@ -93,16 +95,24 @@ export const deleteInfo = async (req, res) => {
     } catch (err) {}
 };
 
+//logout
 
 export const logout = async (req, res) => {
     try {
+        const token = req.cookies.Jwtoken
+        
+        if(token){
+            await User.updateOne({"tokens.token":token},
+                {$pull:{tokens: {token:token}}}
+            )
+        }
         res.clearCookie('Jwtoken', { path: '/' });
         res.status(200).json({
             message: "Logged out successfully",
             success: true,
         });
     } catch (err) {
-        console.error('Logout error:', err); // Log the error for debugging
+        console.error('Logout error:', err); 
         res.status(500).json({
             message: "Internal Server Error",
             success: false,
