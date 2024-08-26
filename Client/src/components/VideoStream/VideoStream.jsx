@@ -2,6 +2,13 @@ import "./videoStream.css";
 // import VideoPlayer from "./VideoPlayer/VideoPlayer";
 // import { useState } from "react";
 import {useNavigate} from "react-router-dom"
+import { useEffect } from "react";
+
+//Imported Animation
+
+import Aos from "aos";
+import "aos/dist/aos.css";
+
 
 
 const videos = [
@@ -44,6 +51,10 @@ export default function VideoStream() {
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+
 
   const playVideo = (e, videoId) =>{
     e.preventDefault
@@ -55,7 +66,7 @@ export default function VideoStream() {
      {/* <div className="videoPlayer">
         {videoId && <VideoPlayer videoId={videoId} />}
       </div> */}
-      <div className="video-list">
+      <div className="video-list" data-aos="fade-up">
         {videos.map((video) => (
           <div key={video.id} onClick={(e) => playVideo(e, video.id)} className="video-card">
             <div className="video-thumbnail">

@@ -5,10 +5,17 @@ import { ToastContainer } from "react-toastify";
 import { useEffect, useState } from "react";
 import { handleSuccess, handleError } from "../Utils/Utils";
 
+//Imported Animation
+
+import Aos from "aos";
+import "aos/dist/aos.css";
+
 //ReactIcons
 
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
+
+
 
 export default function Login() {
   const [loginInfo, setLoginInfo] = useState({
@@ -19,6 +26,10 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
 
   useEffect(()=>{
     const token = localStorage.getItem("token")
@@ -64,7 +75,7 @@ export default function Login() {
         localStorage.setItem("loggedInUser", name);
         setTimeout(() => {
           navigate("/");
-          navigate(0);
+          window.location.reload();
         }, 1000);
       } else if (error) {
         const details = error?.details[0].message;
@@ -87,11 +98,12 @@ export default function Login() {
   return (
     <div className="LoginWrapper">
       <video src={Video} autoPlay loop muted />
-      <div className="wrapper">
-        <form onSubmit={handleSubmit}>
+      <div className="wrapper" data-aos="fade-down">
+        <form onSubmit={handleSubmit} data-aos="fade-down">
           <h1>Login</h1>
           <div className="input-box">
             <input
+            data-aos="fade-up"
               name="email"
               type="email"
               placeholder="Email"
@@ -104,6 +116,7 @@ export default function Login() {
           </div>
           <div className="input-box">
             <input
+            data-aos="fade-up"
               name="password"
               type={showPassword ? "text" : "password"}
               placeholder="Password"
@@ -119,12 +132,13 @@ export default function Login() {
           </div>
           
 
-          <button className="LoginBtn">Login</button>
+          <button className="LoginBtn" data-aos="fade-up">Login</button>
           <div className="register-link">
             <p>
               Don't have an account <Link to="/signup">SignUp </Link>
             </p>
           </div>
+      
         </form>
         <ToastContainer style={{ top: "-100px" }} />
       </div>

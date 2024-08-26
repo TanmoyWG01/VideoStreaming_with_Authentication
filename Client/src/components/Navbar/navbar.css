@@ -78,7 +78,7 @@ a {
   font-size: 20px;
   color: black;
   padding: 0 0 0 5px;
-  top: 38px;
+  top: 14px;
 }
 
 
@@ -87,7 +87,7 @@ a {
   font-size: 18px;
   color: white;
   padding: 0 0 0 5px;
-  top: 38px;
+  top: 15px;
 }
 
 .hamBurgerIcon{
@@ -137,9 +137,21 @@ a {
     visibility: visible;
   }
 
-  .NavbarBtn{
+  .btnNormal {
+    position: absolute;
+    margin: 6rem 0 0 -5rem; 
+  }
   
-    visibility: hidden;
-    
+  .btnlogIn{
+    position: absolute;
+    margin: 3rem 0 0 -7.2rem; 
+  }
+  
+  .logInIcon{
+    margin-top: -29px;
+  }
+
+  .logOutIcon{
+   margin: -28.8px 5px 0 2px;
   }
 }

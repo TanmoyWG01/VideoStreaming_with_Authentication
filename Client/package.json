@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "6pp": "^1.2.16",
+    "@auth0/auth0-react": "^2.2.4",
+    "aos": "^2.3.4",
     "axios": "^1.7.4",
     "bootstrap": "^5.3.3",
     "cookie-parser": "^1.4.6",

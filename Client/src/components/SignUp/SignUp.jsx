@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Video from "../../assets/video.mp4";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -9,6 +9,11 @@ import { handleSuccess, handleError } from "../Utils/Utils";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 
+//Imported Animation
+
+import Aos from "aos";
+import "aos/dist/aos.css";
+
 export default function SignUp() {
   const [info, SetInfo] = useState({
     name: "",
@@ -18,6 +23,17 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+
+  useEffect(()=>{
+    const token = localStorage.getItem("token")
+    if(token){
+      navigate("/")
+    } 
+  },[navigate])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -75,12 +91,12 @@ export default function SignUp() {
 
   return (
     <div>
-      <div className="LoginWrapper">
+      <div className="LoginWrapper" >
         <video src={Video} autoPlay loop muted />
-        <div className="wrapper">
+        <div className="wrapper" data-aos="fade-down" >
           <form onSubmit={handleSubmit}>
             <h1>Sign Up</h1>
-            <div className="input-box">
+            <div className="input-box" data-aos="fade-down">
               <input
                 name="name" 
                 type="text"
@@ -93,7 +109,7 @@ export default function SignUp() {
                 value={info.name}
               />
             </div>
-            <div className="input-box">
+            <div className="input-box" data-aos="fade-up">
               <input
                 name="email"
                 type="email"
@@ -106,7 +122,7 @@ export default function SignUp() {
               />
             </div>
 
-            <div className="input-box">
+            <div className="input-box" data-aos="fade-down">
               <input
                 name="password"
                 type={showPassword ? "text" : "password"}
@@ -124,7 +140,7 @@ export default function SignUp() {
               )}
             </div>
 
-            <button className="LoginBtn">Sign Up</button>
+            <button className="LoginBtn" data-aos="fade-down">Sign Up</button>
             <div className="register-link">
               <p>
                 Already have an account <Link to="/">Login </Link>

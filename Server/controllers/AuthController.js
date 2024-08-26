@@ -66,7 +66,7 @@ export const login = async (req, res) => {
         res.cookie("Jwtoken", jwtToken, {
             httpOnly: true,
             maxAge: 3600000,
-            path: '/' 
+            
         });
 
         // console.log(req.cookies.jwt);
