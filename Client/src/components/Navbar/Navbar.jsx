@@ -27,7 +27,7 @@ export default function Dashboard() {
       const response = await axios.post('/api/logout',{ withCredentials: true });
       localStorage.removeItem("token");
       localStorage.removeItem("loggedInUser");
-        navigate("/");
+        navigate("/login");
     } catch (err) {
       console.error('Logout failed:', err);
       

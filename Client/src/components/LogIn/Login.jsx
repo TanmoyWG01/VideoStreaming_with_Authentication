@@ -22,8 +22,10 @@ export default function Login() {
 
   useEffect(()=>{
     const token = localStorage.getItem("token")
-    if(token){
-      navigate("/home")
+    if(!token){
+      navigate("/login")
+    } else{
+      navigate("/")
     }
   },[navigate])
 
@@ -61,7 +63,7 @@ export default function Login() {
         localStorage.setItem("token", jwtToken);
         localStorage.setItem("loggedInUser", name);
         setTimeout(() => {
-          navigate("/home");
+          navigate("/");
           navigate(0);
         }, 1000);
       } else if (error) {
