@@ -19,8 +19,8 @@ export const accessChat = async (req, res) => {
         { users: { $elemMatch: { $eq: userId } } },
       ],
     })
-      .populate("users", "-password")
-      .populate("latestMessage");
+      .populate("users", "-password -tokens")
+      .populate("latestMessage", "-tokens");
 
     // If chat exists, return it with populated fields
     if (isChat) {
@@ -55,14 +55,15 @@ export const accessChat = async (req, res) => {
   }
 };
 
+
 export const fetchChats = async (req, res) => {
   try {
     const chatResults = await Chat.find({
       users: { $elemMatch: { $eq: req.user._id } }
     })
-      .populate("users", "-password") 
-      .populate("groupAdmin", "-password")
-      .populate("latestMessage")
+      .populate("users", "-password -tokens") 
+      .populate("groupAdmin", "-password -tokens")
+      .populate("latestMessage", "-tokens")
       .sort({updatedAt: -1})
       .then(async(results) => {
         results = await User.populate(results,{
@@ -112,12 +113,93 @@ export const createGroupChat = async (req, res) => {
     });
 
     const fullGroupChat = await Chat.findOne({ _id: groupChat._id })
-      .populate("users", "-password -tokens") // Exclude tokens and password fields
-      .populate("groupAdmin", "-password -tokens"); // Exclude tokens and password for the group admin as well
+      .populate("users", "-password -tokens") 
+      .populate("groupAdmin", "-password -tokens"); 
 
     res.status(200).json(fullGroupChat);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "An error occurred while creating the group chat." });
+  }
+};
+
+
+export const renameGroup = async(req,res)=>{
+  const {chatId, chatName} = req.body;
+
+  const updatedChat = await Chat.findByIdAndUpdate(
+    chatId,{
+      chatName,
+    },
+    {
+      new:true
+    }
+  )
+  .populate("users", "-password -tokens")
+  .populate("groupAdmin", "-password -tokens")
+
+  if(!updatedChat){
+    console.error("[RENAME GROUP CHAT]", error);
+    return res.status(404).json({message: "An error occurred while renaming the group."})
+  }else{
+    res.json(updatedChat)
+  }
+}
+
+
+export const addToGroup = async (req, res) => {
+  try {
+    const { chatId, userId } = req.body;
+
+    // Check if chatId and userId are present
+    if (!chatId || !userId) {
+      return res.status(400).json({ message: "Chat ID and User ID are required." });
+    }
+
+    const added = await Chat.findByIdAndUpdate(
+      chatId,
+      { $push: { users: userId } },
+      { new: true }
+    )
+    .populate("users", "-password -tokens")
+    .populate("groupAdmin", "-password -tokens");
+
+    if (!added) {
+      return res.status(404).json({ message: "Chat not found." });
+    }
+
+    res.json(added);
+  } catch (error) {
+    console.error("[ADD TO GROUP]", error);
+    res.status(500).json({ message: "An error occurred while adding to the group." });
+  }
+};
+
+
+export const removeFromGroup = async(req,res)=>{
+  try {
+    const { chatId, userId } = req.body;
+
+    // Check if chatId and userId are present
+    if (!chatId || !userId) {
+      return res.status(400).json({ message: "Chat ID and User ID are required." });
+    }
+
+    const removed = await Chat.findByIdAndUpdate(
+      chatId,
+      { $pull: { users: userId } },
+      { new: true }
+    )
+    .populate("users", "-password -tokens")
+    .populate("groupAdmin", "-password -tokens");
+
+    if (!removed) {
+      return res.status(404).json({ message: "Chat not found." });
+    }
+
+    res.json(removed);
+  } catch (error) {
+    console.error("[REMOVED TO GROUP]", error);
+    res.status(500).json({ message: "An error occurred while removing from the group." });
   }
 };
