@@ -12,6 +12,7 @@ import { createReadStream, statSync } from "fs";
 import cookieParser from "cookie-parser";
 import { authenticateToken } from "./MiddleWare/Authmiddleware.js";
 import { logout } from "./controllers/AuthController.js";
+import ChatRoutes from "./routes/ChatRoutes.js"
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
@@ -33,7 +34,10 @@ const url = process.env.MONGO_URL;
 
 const connect = async () => {
   try {
-    await mongoose.connect(url);
+    await mongoose.connect(url,{
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
+    });
     console.log("Connected to MongoDB Database!");
   } catch (err) {
     throw err;
@@ -94,6 +98,7 @@ app.get("/video/:filename", (req, res) => {
 
 app.use("/api/auth", AuthRouter);
 app.post("/api/logout", logout);
+app.use("/api/chat", ChatRoutes)
 
 
 app.listen(PORT, () => {

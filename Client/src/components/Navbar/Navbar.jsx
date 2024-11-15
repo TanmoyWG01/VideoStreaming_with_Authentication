@@ -15,6 +15,7 @@ import { MdClose } from "react-icons/md";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Chat from "../Chat/chat";
 
 
 export default function Dashboard() {
@@ -55,6 +56,11 @@ export default function Dashboard() {
       </div>
       <div className="NavbarBtn" data-aos="fade-down">
   {  showIcon && (<div >
+
+    <button className="btnlogIn"  style={{ color: "black" }} >
+          <a href="/chat">Chat</a>
+        </button>
+
         <button className="btnlogIn" style={{ color: "black" }} >
           {loggedInUser}
           <CiLogin className="logInIcon" />
