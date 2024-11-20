@@ -1,7 +1,6 @@
 import {
   AbsoluteCenter,
   Button as ChakraButton,
-  Span,
   Spinner,
 } from '@chakra-ui/react'
 import * as React from 'react'

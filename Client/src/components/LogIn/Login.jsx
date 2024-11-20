@@ -15,8 +15,6 @@ import "aos/dist/aos.css";
 import { BsEye } from "react-icons/bs";
 import { BsEyeSlash } from "react-icons/bs";
 
-
-
 export default function Login() {
   const [loginInfo, setLoginInfo] = useState({
     email: "",
@@ -31,14 +29,14 @@ export default function Login() {
     Aos.init({ duration: 2000 });
   }, []);
 
-  useEffect(()=>{
-    const token = localStorage.getItem("token")
-    if(!token){
-      navigate("/login")
-    } else{
-      navigate("/")
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    } else {
+      navigate("/");
     }
-  },[navigate])
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -85,7 +83,6 @@ export default function Login() {
       }
 
       //  console.log(result)
-      
     } catch (err) {
       handleError(err);
     }
@@ -103,7 +100,7 @@ export default function Login() {
           <h1>Login</h1>
           <div className="input-box">
             <input
-            data-aos="fade-up"
+              data-aos="fade-up"
               name="email"
               type="email"
               placeholder="Email"
@@ -116,7 +113,7 @@ export default function Login() {
           </div>
           <div className="input-box">
             <input
-            data-aos="fade-up"
+              data-aos="fade-up"
               name="password"
               type={showPassword ? "text" : "password"}
               placeholder="Password"
@@ -130,15 +127,15 @@ export default function Login() {
               <BsEyeSlash className="eyeIcon" onClick={handleShow} />
             )}
           </div>
-          
 
-          <button className="LoginBtn" data-aos="fade-up">Login</button>
+          <button className="LoginBtn" data-aos="fade-up">
+            Login
+          </button>
           <div className="register-link">
             <p>
-              Don't have an account <Link to="/signup">SignUp </Link>
+              Don&apost have an account <Link to="/signup">SignUp </Link>
             </p>
           </div>
-      
         </form>
         <ToastContainer style={{ top: "-100px" }} />
       </div>
